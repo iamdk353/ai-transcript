@@ -18,8 +18,6 @@ def getData(url:str):
     return(resp.text)
 
 def getTranscript(url:str):
-  
-  try:
     with st.spinner("loading"):
       videoId=url.split("=")[1]
       text=YouTubeTranscriptApi.get_transcript(video_id=videoId)
@@ -33,8 +31,6 @@ def getTranscript(url:str):
       for i in text:
         transcript+=" "+i["text"]
       return transcript
-  except Exception as e:
-      raise "could not retrive transcript of the video"
 
 st.title("AI YOUTUBE VIDEO EXPLANATION BOT")
 ytLink=st.text_input("enter yt link")
@@ -42,4 +38,3 @@ if ytLink:
    videoId=ytLink.split("=")[1]
    st.image(f"http://img.youtube.com/vi/{videoId}/0.jpg",use_container_width=True)
    st.write(getData(ytLink))
-# "AIzaSyCrf1ChQC24gck0Vbt_M-sVPbr_DdRej8Y"
